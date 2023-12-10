@@ -3,7 +3,7 @@ let compSc = 0;
 let choices = document.querySelectorAll(".choice");
 let userScore = document.querySelector("#userScore");
 let compScore = document.querySelector("#compScore");
-let msgContainer = document.querySelector("#msg");
+let msgContainer = document.querySelector(".msg-container");
 
 
 
@@ -15,9 +15,9 @@ function randomChoiceGen() {
 }
 
 
-//Message updater function
-let drawGame = (msgContainer)=>{
-    msgContainer.classList.remove(".hide");
+//draw updater function
+let drawGame = ()=>{
+    msgContainer.classList.remove("hide");
     msgContainer.innerText = "It's a draw!!"
 };
 
@@ -31,6 +31,7 @@ let scoreUpdate = (userScore, userSc, compScore, compSc)=>{
 //Getting user choice & Computer choice
 choices.forEach((choice) => {
     choice.addEventListener("click", () => {
+        msgContainer.classList.add("hide");             // reset the draw container
         let userChoice = choice.getAttribute("id")
         console.log(userChoice, "selected by you")
         let compChoice = randomChoiceGen();             //compuer generating
@@ -46,7 +47,7 @@ choices.forEach((choice) => {
 let gameLog = (userChoice, compChoice)=>{
     if(userChoice === compChoice){
         console.log("Draw");
-        drawGame(msgContainer);
+        drawGame();
     }
     else{
         if(userChoice==="stone"){
